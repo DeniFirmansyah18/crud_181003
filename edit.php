@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Si Mahasiswa | Edit Data</h2>
+    <br/>
+    <a href="index.php">Halaman Utama</a>
+    <br/>
+    <br/>
+    <h3>Edit Data Mahasiswa</h3>
+
+    <?php
+    include 'koneksi.php';
+    $id = $_GET['id'];
+    $query = mysqli_query($koneksi,"select * from mahasiswa where id='$id'");
+    while($data = mysqli_fetch_array($query)){
+    ?>
+
+    <form method="post" action="edit_aksi.php">
+        <table>
+            <tr>
+                <td>Nama</td>
+                <td>
+                    <input type="hidden" name="id" value="<?php echo $data['id']; ?>">
+                    <input type="text" name="nama" value="<?php echo $data['nama']; ?>">
+                </td>
+            </tr>
+            <tr>
+                <td>NIM</td>
+                <td><input type="number" name="nim" value="<?php echo $data['nim']; ?>"></td>
+            </tr>
+            <tr>
+                <td>Alamat</td>
+                <td><input type="text" name="alamat" value="<?php echo $data['alamat']; ?>"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit" value="Simpan"></td>
+            </tr>
+        </table>
+    </form>
+    <?php
+    }
+    ?>
+</body>
+</html>
